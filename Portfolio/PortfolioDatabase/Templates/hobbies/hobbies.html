@@ -1,0 +1,32 @@
+{% extends 'home/base.html'%}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        <{% block body%}>
+            {% for i in hobbies_list%}
+                <a href="/hobbies/{{ i.id }}">
+                    <div class="card btn"  role="button">
+                        <div class="float-start">
+                            <img src="{{ i.hobby_image }}" class="img-thumbnail" width="300px">
+                        </div>
+                        <div class="float-end">
+                            <div class="card-body">
+                                <h4 class="card-title">{{ i.hobby_name }}</h4>
+                                <p class="card-text">{{ i.portfolio_item_desc }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            {% endfor %}
+        <{% endblock %}>
+        <script src="" async defer></script>
+    </body>
+</html>

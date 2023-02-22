@@ -9,6 +9,7 @@ class Hobby(models.Model):
     
     hobby_name = models.CharField(max_length=50)
     hobby_desc = models.CharField(max_length=50)
+    hobby_image = models.CharField(max_length=500, default="https://static.vecteezy.com/system/resources/previews/005/068/699/original/a-simple-gear-logo-or-icon-design-vector.jpg")
 
 
 class Portfolio_item(models.Model):
@@ -18,4 +19,5 @@ class Portfolio_item(models.Model):
 
     portfolio_item_name = models.CharField(max_length=50)
     portfolio_item_desc = models.CharField(max_length=50)
+    portfolio_image = models.CharField(max_length=500, default="https://static.vecteezy.com/system/resources/previews/005/068/699/original/a-simple-gear-logo-or-icon-design-vector.jpg")
 
