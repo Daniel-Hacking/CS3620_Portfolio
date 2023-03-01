@@ -21,3 +21,11 @@ class Portfolio_item(models.Model):
     portfolio_item_desc = models.CharField(max_length=50)
     portfolio_image = models.CharField(max_length=500, default="https://static.vecteezy.com/system/resources/previews/005/068/699/original/a-simple-gear-logo-or-icon-design-vector.jpg")
 
+class Contact_Info(models.Model):
+
+    def __str__(self):
+        return self.contact_name
+
+    contact_name = models.CharField(max_length=32)
+    contact_email = models.CharField(max_length=64)
+    contact_message = models.CharField(max_length=256)

@@ -1,0 +1,12 @@
+{% extends 'home/base.html' %}
+
+{% block body %}
+    <form method="POST">
+        {% csrf_token %}
+        <h3>You have been logged out.</h3>
+        <a class="btn btn-primary" href="{% url 'login' %}" role="button">Login</a>
+        <a class="btn btn-secondary" href="{% url 'portfolio' %}" role="button">Return</a>
+    </form>
+{% endblock %}
+
+

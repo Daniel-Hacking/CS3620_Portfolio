@@ -1,7 +1,8 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Hobby, Portfolio_item
 from django.template import loader
+from .forms import ContactForm, AddPortfolioItem, EditPortfolioItem
 
 # Create your views here.
 
@@ -40,3 +41,42 @@ def portfolio_page(request, portfolio_id):
         'portfolio': portfolio
     }
     return render(request, 'portfolio/item.html', context)
+
+def contact_form(request):
+    
+    if request.method == 'POST':
+        form = ContactForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            return render(request, 'home/index.html')
+    else:
+        form = ContactForm()
+    return render(request, 'home/contact_form.html', {'form': form})
+
+def add_portfolio_item(request):
+    
+    form = AddPortfolioItem(request.POST or None)
+
+    if form.is_valid():
+        form.save()
+        return render(request, 'portfolio/portfolio.html')
+    return render(request, 'portfolio/portfolio_item_form.html', {'form': form})
+
+def edit_portfolio_item(request, portfolio_id):
+    item = Portfolio_item.objects.get(id=portfolio_id)
+    form = EditPortfolioItem(request.POST or None, instance=item)
+
+    if form.is_valid():
+        form.save()
+        return redirect('portfolio')
+        
+    return render(request, 'portfolio/portfolio_item_form.html', {'form': form, 'item': item})
+
+def remove_portfolio_item(request, portfolio_id):
+    item = Portfolio_item.objects.get(id=portfolio_id)
+    if request.method == 'POST':
+        item.delete()
+        return redirect('portfolio')
+        
+    return render(request, 'portfolio/remove_item.html', {'item': item})
